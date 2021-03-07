@@ -1,0 +1,102 @@
+<br/><br/>
+    <h4 style="text-align: center;">Exchange Rate</h4>
+    <br/><br/>
+
+    <div class="d-flex justify-content-center align-items-center container ">
+        <div class="col-md-6 col-md-offset-3" style="background-color: linen;">
+                
+        <form [formGroup]="myForm">            
+        <br/>
+        <br/>
+        <div>
+            <input class="form-control" type="number" input-group-sm formControlName="amount" placeholder="Enter Amount">
+                <div *ngIf="submitted && isFieldValid('amount')">
+                    <small class="text-danger">
+                        Amount is required
+                    </small>
+                </div>
+        </div>
+        <br/>
+        <div>
+            <input class="form-control" type="text" input-group-sm formControlName="countryRates" placeholder="Enter Base currency">
+                <div *ngIf="submitted && isFieldValid('countryRates')">
+                    <small class="text-danger">
+                        Base currency is required
+                    </small>
+                </div>
+        </div>
+        <br/>
+        <div>
+            <input class="form-control" type="text" input-group-sm formControlName="targetRates" placeholder="Enter Target currency">
+                <div *ngIf="submitted && isFieldValid('targetRates')">
+                    <small class="text-danger">
+                        Target currency is required
+                    </small>
+                </div>
+        </div>
+        <br/>
+            <div>
+                <select formControlName="countryRates" class="form-control" id="base-currency-field" (change)="onBaseCurrencyChange($event)">
+                    <option value='' [selected]="'Select Base Currency'" hidden>Select Base Currency</option>
+                    <option *ngFor="let option of currencyRates;let i=index" [ngValue]="option.rate" [selected]="option.currencyCode == selectedBase">{{ currencyRates[i].currencyCode }}</option>
+                </select>
+                <div *ngIf="submitted && isFieldValid('countryRates')">
+                    <small class="text-danger">
+                     Base currency is required
+                    </small>
+                </div>
+            </div>
+            <br/>
+            
+            <div>
+                <select formControlName="targetRates" class="form-control" id="target-rates" (change)="onTargetCurrencyChange($event)">
+                    <option value='' [selected]="'Select Target Currency'" hidden>Select Target Currency</option>
+                    <option *ngFor="let option of currencyRates;let j=index" [ngValue]="option.rate" [selected]="option.currencyCode == selectedTarget">{{ currencyRates[j].currencyCode }}</option>
+                </select>
+                <div *ngIf="submitted && isFieldValid('targetRates')">
+                    <small class="text-danger">
+                        Target currency is required
+                    </small>
+                </div>
+            </div>
+
+            <br/>
+            <div>
+                <button type="submit">Convert</button>
+            </div>
+            <div>
+                <button type="button" (click)="resetForm()">Reset</button>
+            </div>
+
+            <br/>
+            <br/><br/>
+            </form>
+        
+            <br/>
+            <div class="currencyTable" *ngIf="isVisible">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Base Currency</th>
+                            <th scope="col">Target Currency</th>                          
+                            <th scope="col">Converted Amount</th>
+                            <th scope="col">Base Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let data of convertedRates; let i = index">
+                        <tr>
+                            <td>{{data.amount | currency:data.baseCurrencyCode}}</td>
+                            <td>{{data.baseCurrencyCode}}</td>
+                            <td>{{data.countryCurrencyCode}}</td>
+                            <td>{{'1&nbsp;' + data.baseCurrencyCode + '=' + data.oneUnitConversion + '&nbsp;' + data.countryCurrencyCode}}
+                            </td>
+                            
+                            <td><span class="price">{{data.convertedCountryRate | currency: data.countryCurrencyCode:'symbol':'1.0-2' }}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <br/><br/>
+        </div>

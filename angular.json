@@ -61,7 +61,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "day4homework2:build"
+            "browserTarget": "day4homework2:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {

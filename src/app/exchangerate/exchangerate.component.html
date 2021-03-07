@@ -1,0 +1,58 @@
+<br/><br/>
+    <h4 style="text-align: center;">Exchange Rate</h4>
+    <br/><br/>
+
+    <div class="d-flex justify-content-center align-items-center container ">
+        <div class="col-md-6 col-md-offset-3" style="background-color: linen;">
+                
+        <form [formGroup]="form">            
+        <br/><br/>
+            <div>
+                <label for="base" class="form-label">Base Amount:</label>
+                <input type="text" class="form-control" id="base" placeholder="" formControlName="base">
+            </div>
+            <br/>
+            <div>
+                <label for="currency" class="form-label">Currency</label>
+                <input type="text" class="form-control" id="currency" placeholder="" formControlName="currency">
+            </div>
+            <br/>
+            <div>
+                <label for="exchange" class="form-label">Exchange:</label>
+                <input type="text" class="form-control" id="exchange" placeholder="" formControlName="exchange">
+            </div>
+
+            <br/>
+            <div>
+              <label for="rates" class="form-label">Rate Amount:</label>
+              <input type="text" class="form-control" id="rates" placeholder="" formControlName="rates" disabled>
+            </div>
+                        
+            <br/>
+            <div>
+              <button type="submit" class="btn btn-primary" (click)="addCurrency()">CONVERT</button>
+            </div>
+
+            <br/>
+            <br/>
+            </form>
+        
+            <br/>
+            <div>
+                <code>
+                    {{form.value | json}}
+                </code>
+            </div>
+            <br/>
+            <br/>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
